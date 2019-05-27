@@ -4,13 +4,13 @@
 (Taken from the doc file that was prepared)
 
 ### Test_burn(aprox19): 
-./setup test_burn -objdir=object_testburn_aprox19 -3d +cube32 -auto -maxblocks=30 -unit=physics/sourceTerms/Burn/BurnMain/nuclearBurn/Aprox19 
+./setup test_burn -objdir=object_testburn_aprox19 -3d +cube8 -auto -maxblocks=30 -unit=physics/sourceTerms/Burn/BurnMain/nuclearBurn/Aprox19 
 
 ### Aprox13 
-./setup test_burn -objdir=object_testburn_aprox13 -3d +cube32 -auto -maxblocks=30 -unit=physics/sourceTerms/Burn/BurnMain/nuclearBurn/Aprox13 
+./setup test_burn -objdir=object_testburn_aprox13 -3d +cube8 -auto -maxblocks=30 -unit=physics/sourceTerms/Burn/BurnMain/nuclearBurn/Aprox13 
 
 ### Xnet: 
-./setup test_burn -objdir=object_testburn_xnet_SN231_GPU -3d +cube32 -auto -maxblocks=30 xnet=True xnetGPU=True xnetData=Data_SN231 
+./setup test_burn -objdir=object_testburn_xnet_SN231_GPU -3d +cube8 -auto -maxblocks=30 xnet=True xnetGPU=True xnetData=Data_SN231
 
  
 
