@@ -98,3 +98,33 @@ flash4             0000000000405509  Unknown               Unknown  Unknown
 ### Issues on running on multiple GPUs: 
 
 Segmentation fault, all the processes try to fit on a single GPU. 
+
+### Running Standalone xnet code:
+Code: https://wikihost.nscl.msu.edu/talent/doku.php?id=rxnnetcode
+
+
+#### Installation:
+- Unzip the directory.
+- Follow instructions on the path: $XNET/doc/Compiling.txt
+- cd $XNET/source
+- cp Makefile_local_ifort Makefile_local (carnie has ifort)
+- make
+- This will create the executable xnet in the source directory.
+
+#### Running:
+- $XNET/
+- Current Directory should contain the "control" file. Should be named as "control"
+- The control file points to the nuclear data directory.
+   - eg: $XNET/test/Data_alpha
+- The control files points to the Initial Abundance and Thermodynamic Trajectory Files
+  - eg: $XNET/test/Data_alpha/ab_he (Specifies the initial abund)(Ye)
+     and
+        $XNET/th_constant (the temperature and density)
+  - Other parameter for the numerical algorithm
+  - List of nuclides to output.
+- Run the executable in the source dorectory, where the control file is.
+
+#### Results:
+- Results will be in the file "ev".
+- The log file is the file "tso".
+  
