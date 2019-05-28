@@ -1,0 +1,19 @@
+./Data_SN160                                                                    
+Number of Nuclear Species=  160
+Reaction Count for the 8 different types
+         1         1        96
+         2        97       590
+         3       591       596
+         4         1       495
+         5       496      1331
+         6      1332      1341
+         7      1342      1345
+         8         1        16
+Necessary dimensions
+  nreac(1,2,3)=     596    1345      16
+    nan(1,2,3)=    1688    4860      53
+Reaction Count for non-REACLIB rates
+  nffn=       0   nnu=       0
+Matrix Sparseness parameters
+Border Widths      29   29
+Diagonal Widths    19   19(j<i,j>i)

@@ -1,0 +1,19 @@
+./Data_SN231                                                                    
+Number of Nuclear Species=  231
+Reaction Count for the 8 different types
+         1         1       164
+         2       165       917
+         3       918       923
+         4         1       744
+         5       745      2040
+         6      2041      2056
+         7      2057      2062
+         8         1        22
+Necessary dimensions
+  nreac(1,2,3)=     923    2062      22
+    nan(1,2,3)=    2601    7472      73
+Reaction Count for non-REACLIB rates
+  nffn=       0   nnu=       0
+Matrix Sparseness parameters
+Border Widths      35   35
+Diagonal Widths    20   23(j<i,j>i)
