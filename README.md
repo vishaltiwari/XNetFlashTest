@@ -138,5 +138,12 @@ Code: https://wikihost.nscl.msu.edu/talent/doku.php?id=rxnnetcode
 - Add the list of nuclides in the INPUT directory. Name is as sunet.
 - Complie the code: ifort reducereaclib.f, and execute: ./a.out
 - netwinv and netsu are generated.
+
+#### Analysizing the binary Time-series files(using matlab):
+- tools/matlab/read_ts_file.m : Parse the extract and parse the file.
+- tools/matlab/plot_time_mf.m : Get Z,A, mass fraction.
+- Need to write scripts that will map the Z,A to a particular nuclide, and output the mass fraction in the file format used for testing.
+
+
    
 
