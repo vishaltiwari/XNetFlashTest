@@ -1,0 +1,14 @@
+ar36     0 constituents
+c12      0 constituents
+ca40     0 constituents
+cr48     0 constituents
+fe52     0 constituents
+he4      0 constituents
+mg24     0 constituents
+ne20     0 constituents
+ni56     0 constituents
+o16      0 constituents
+s32      0 constituents
+si28     0 constituents
+ti44     0 constituents
+zn60     0 constituents
