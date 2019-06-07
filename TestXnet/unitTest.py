@@ -3,8 +3,14 @@
 def main():
   #skynet_results = ['skynet_SN150_yields.txt' , 'skynet_SN160_yields.txt' , 'skynet_SN231_yields.txt']
   #xnet_results = ['xnet_SN150_yields.txt' , 'xnet_SN160_yields.txt' , 'xnet_SN231_yields.txt']
-  skynet_results = [ 'skynet_SN160_yields.txt']
-  xnet_results = ['xnet_SN160_yields.txt']
+  #skynet_results = [ 'skynet_SN160_T6e9_rho1e9yields.txt']
+  #xnet_results = ['xnet_SN231_rho1e9_yields.txt']
+  #skynet_results = [ 'xnet_standalone_alpha_yields.txt']
+  #xnet_results = ['xnet_alpha_rho1e9_yields.txt']
+  #skynet_results = ['/home/vtiwari/runs/XNetFlashTest/xnet_standalone/branches/public/my_code/xnetStandalone_SN150_yields.txt']
+  #skynet_results = ['xnet_standalone_alpha_dtmax_1e2_yields.txt']
+  skynet_results = ['xnet_standalone_alpha_yields.txt']
+  xnet_results = ['xnet_alpha_rho1e9_T7e9_1d_yields.txt']
 
   for indx , file_name in enumerate(skynet_results):
     print("comparing:" + file_name + " " + xnet_results[indx])

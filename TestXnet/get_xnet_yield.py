@@ -78,7 +78,7 @@ def plot_abund(abundance_dict_time , sym_list,file_name):
         mark = True
       sym_abund[sym].append(abund_val)
     # plot
-    #if sym == 'c12':
+    #if sym == 'fe53':
     #  pdb.set_trace()
     handle, = plt.plot(range(len(abundance_dict_time.keys())) , sym_abund[sym], label=sym)
     if mark == True:
@@ -96,10 +96,18 @@ def plot_abund(abundance_dict_time , sym_list,file_name):
 
 def main():
   print("Inside the main function")
-  filenames = ["xnet_SN150_rho2e3.dat","xnet_SN150_rho2e7.dat", "xnet_SN160_rho2e3.dat","xnet_SN160_rho2e7.dat", "xnet_SN231_rho2e3_long.dat","xnet_SN231_rho2e7.dat"]
-  nuclide_list = ["Data_SN150_list.txt","Data_SN150_list.txt","Data_SN160_list.txt","Data_SN160_list.txt","Data_SN231_list.txt","Data_SN231_list.txt"]
-  #filenames = ["xnet_SN231_rho2e7.dat"]
-  #nuclide_list = ["Data_SN231_list.txt"]
+  #filenames = ["xnet_SN150_rho2e3.dat","xnet_SN150_rho2e7.dat", "xnet_SN160_rho2e3.dat","xnet_SN160_rho2e7.dat", "xnet_SN231_rho2e3_long.dat","xnet_SN231_rho2e7.dat","xnet_SN150_rho1e9.dat","xnet_SN160_rho1e9.dat","xnet_SN231_rho1e9.dat"]
+  #nuclide_list = ["Data_SN150_list.txt","Data_SN150_list.txt","Data_SN160_list.txt","Data_SN160_list.txt","Data_SN231_list.txt","Data_SN231_list.txt","Data_SN150_list.txt","Data_SN160_list.txt","Data_SN231_list.txt"]
+  #filenames = ["xnet_SN160_rho1e9.dat"]
+  #nuclide_list = ["Data_SN160_list.txt"]
+  #filenames = ['xnet_alpha_rho1e9.dat']
+  #nuclide_list = ['Data_alpha_list.txt']
+  #filenames = ['xnet_SN231_rho1e9_temp_7e9.dat']
+  #nuclide_list = ['Data_SN231_list.txt']
+  #filenames = ['xnet_alpha_rho1e9_new_xnet_parm.dat']
+  #filenames = ['xnet_alpha_new.dat']
+  filenames = ['xnet_alpha_rho1e9_T7e9_1d.dat']
+  nuclide_list = ['Data_alpha_list.txt']
   for indx , file_name in enumerate(filenames):
     abundance_dict_time = parse_extract(file_name)
     total_iter = len(abundance_dict_time.keys())
