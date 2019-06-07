@@ -97,7 +97,7 @@ flash4             0000000000405509  Unknown               Unknown  Unknown
  
 ### Issues on running on multiple GPUs: 
 
-Segmentation fault, all the processes try to fit on a single GPU. 
+Segmentation fault, all the processes try to fit on a single GPU. Using multiple GPUS need the code to be in MPI, not sure if xnetFlash is doing that, need to check!.
 
 ### Running Standalone xnet code:
 Code: https://wikihost.nscl.msu.edu/talent/doku.php?id=rxnnetcode
@@ -143,6 +143,26 @@ Code: https://wikihost.nscl.msu.edu/talent/doku.php?id=rxnnetcode
 - tools/matlab/read_ts_file.m : Parse the extract and parse the file.
 - tools/matlab/plot_time_mf.m : Get Z,A, mass fraction.
 - Need to write scripts that will map the Z,A to a particular nuclide, and output the mass fraction in the file format used for testing.
+
+
+### Changing the parameters for the XnetFlash.
+Config file: source/physics/sourceTerms/Burn/BurnMain/nuclearBurn/XNet/Config
+
+| XNetStandalone  | XNetFlash  | Value | 
+| ---------------- |:------------------:| :------------------:|
+|Initial Zone  (Number)                                     |xnet_nzbatchmx      |  1 |
+|Weak Reactions (yes=1,no=0,only=-1)                        |xnet_iweak          |  1 |
+|Screening (yes=1)                                          |xnet_iscrn          |  1 |
+|Process Nuclear Data (yes=1,no=0)                          |xnet_iprocess       |  1 |
+|integration Scheme (1=Backward Euler, 2= Bader-Deufelhard) |xnet_isolv          |  1 |
+|Max. number of timesteps (number)                          |xnet_kstmx          |  6000 |
+|Max. iterations per step | xnet_kitmx | 5 |
+| Convergence Condition (Mass Cons.=0, (dY/Y small)=1) | xnet_iconvc | 1 |
+| Max. Abundance Change per timestep | xnet_changemx | 1.0e-1 |
+| Smallest Abundance used in timestep calculation | xnet_yacc | 1.0e-7 | 
+| Mass Conservation Limit | xnet_tolc | 1.00E-08 |
+| Convergence Criterion | xnet_ymin | 1.0e-30 |
+| Max. Factor to change dt in a timestep | xnet_tdel_maxmult | 2.0e+0 |
 
 
    
