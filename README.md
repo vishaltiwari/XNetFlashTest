@@ -165,5 +165,35 @@ Config file: source/physics/sourceTerms/Burn/BurnMain/nuclearBurn/XNet/Config
 | Max. Factor to change dt in a timestep | xnet_tdel_maxmult | 2.0e+0 |
 
 
-   
+### There are clear differences in the Nuclear Network data from XNETFLash and XnetStandalone:
+
+#### netwinv files
+n14      14.000   7   7   1.0     2.86341671                                                                                               
+1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00                                             
+1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00                                             
+1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00                                             
+
+n14      14.000   7   7   1.0     2.863                                                                                                     
+1.00     1.00     1.00     1.00     1.00     1.00     1.00     1.00                                                                      
+1.00     1.00     1.00     1.00     1.00     1.00     1.00     1.00                                                                      
+1.00     1.00     1.00     1.00     1.00     1.00     1.00     1.00                                                                      
+
+
+
+
+
+#### netsu:
+The reaction with label *ffn* is missing in the XNetStandlone. 
+Example:
+
+XnetStandalone  
+0     na22 ne22                            wc12w     2.84300E+0  
+-0.185900E+02 0.000000E+00 0.000000E+00 0.000000E+00  
+0.000000E+00 0.000000E+00 0.000000E+00  
+
+XNetFlash  
+0     na22 ne22                             ffn      2.33100E+00  
+0.140000E+02 0.000000E+00 0.000000E+00 0.000000E+00  
+0.000000E+00 0.000000E+00 0.000000E+00            
+
 
