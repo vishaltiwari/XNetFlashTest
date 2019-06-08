@@ -168,11 +168,13 @@ Config file: source/physics/sourceTerms/Burn/BurnMain/nuclearBurn/XNet/Config
 ### There are clear differences in the Nuclear Network data from XNETFLash and XnetStandalone:
 
 #### netwinv files
+XNetFlash  
 n14      14.000   7   7   1.0     2.86341671                                                                                               
 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00                                             
 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00                                             
 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00                                             
 
+XNet Standalone  
 n14      14.000   7   7   1.0     2.863                                                                                                     
 1.00     1.00     1.00     1.00     1.00     1.00     1.00     1.00                                                                      
 1.00     1.00     1.00     1.00     1.00     1.00     1.00     1.00                                                                      
