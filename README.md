@@ -198,4 +198,9 @@ XNetFlash
 0.140000E+02 0.000000E+00 0.000000E+00 0.000000E+00  
 0.000000E+00 0.000000E+00 0.000000E+00            
 
+## Skynet on Carnie
+
+## touch nuclear reaction network.
+
+## Comparing the error between Skynet(NSE) vs timmes Touch(NSE) vs XnetStandalone vs XNetFlash
 
