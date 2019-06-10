@@ -12,7 +12,16 @@
 ### Xnet: 
 ./setup test_burn -objdir=object_testburn_xnet_SN231_GPU -3d +cube8 -auto -maxblocks=30 xnet=True xnetGPU=True xnetData=Data_SN231
 
- 
+#### 1D, 1 cell
+./setup test_burn -objdir=object_testburn_xnet_alpha_GPU -1d -auto -maxblocks=30 xnet=True xnetData=Data_alpha xnetGPU=True +noio -nxb=1
+
+For now the temperature is set by changing the temperature variable in the Burn.F90 file.
+`tmp(ii,jj,kk,thisBlock)  = 5.0e9` line 226, because these is some issue in setting the temperature in Simulation_initBlock.F90.
+
+Other Xnet parameters are set in the Config file: `source/physics/sourceTerms/Burn/BurnMain/nuclearBurn/XNet/Config`
+
+Density is the average of minRho and maxRho in the flash.par file. Initial abundance is explicity set to 0.5 for c12 and 016.
+
 
 ### Changes in the Makefile: 
 
@@ -248,6 +257,7 @@ Not able to find SWIG, after changing the PATH variable, its not able to find li
 
 
 ## torch nuclear reaction network.
+
 
 ## Comparing the error between Skynet(NSE) vs timmes Touch(NSE) vs XnetStandalone vs XNetFlash
 
