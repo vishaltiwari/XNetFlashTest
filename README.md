@@ -200,7 +200,44 @@ XNetFlash
 
 ## Skynet on Carnie
 
-## touch nuclear reaction network.
+#### Building GSL
+- wget ftp://ftp.gnu.org/gnu/gsl/gsl-latest.tar.gz
+- gunzip and tar the file.
+- ./configure --prefix=/home/vtiwari/lib/gsl
+- make install -j 16
+
+#### Building Boost
+- Download the source from https://www.boost.org/.
+- ./bootstrap.sh
+- ./b2 -j 16
+- ./b2 headers
+- Libs in $BOOST/stage/lib
+- Include files in $BOOST/boost
+- export BOOST_ROOT=/home/vtiwari/local_sw/boost/boost_1_70_0/
+
+#### Installing Pardiso
+- Download the library from the website: https://pardiso-project.org/
+- Put the lic in the file: /home/vtiwari/.local/lic/pardiso.lic
+
+#### Building Swig:
+- Download the source from :
+- ./configure --prefix=/home/vtiwari/lib/swig
+- make install -j 16
+
+CMAKE PATH
+export CMAKE_PREFIX_PATH=/home/vtiwari/lib/swig:/home/vtiwari/lib/gsl/:/home/vtiwari/local_sw/lapack-3.8.0:/home/vtiwari/lib/pardiso:$CMAKE_PREFIX_PATH
+
+export LD_LIBRARY_PATH=/sw/lib:$LD_LIBRARY_PATH
+
+INSTALL:
+make -j 16 install
+
+#### Issues:
+/home/vtiwari/lib/pardiso/libpardiso600-GNU800-X86-64.so: undefined reference to `log2f@GLIBC_2.27'                                          
+/home/vtiwari/lib/pardiso/libpardiso600-GNU800-X86-64.so: undefined reference to `logf@GLIBC_2.27'                                           
+
+
+## torch nuclear reaction network.
 
 ## Comparing the error between Skynet(NSE) vs timmes Touch(NSE) vs XnetStandalone vs XNetFlash
 
