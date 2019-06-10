@@ -200,6 +200,8 @@ XNetFlash
 
 ## Skynet on Carnie
 
+Bitkucket: git clone https://bitbucket.org/jlippuner/skynet.git
+
 #### Building GSL
 - wget ftp://ftp.gnu.org/gnu/gsl/gsl-latest.tar.gz
 - gunzip and tar the file.
@@ -213,7 +215,7 @@ XNetFlash
 - ./b2 headers
 - Libs in $BOOST/stage/lib
 - Include files in $BOOST/boost
-- export BOOST_ROOT=/home/vtiwari/local_sw/boost/boost_1_70_0/
+- <b>export BOOST_ROOT=/home/vtiwari/local_sw/boost/boost_1_70_0/</b>
 
 #### Installing Pardiso
 - Download the library from the website: https://pardiso-project.org/
@@ -224,17 +226,25 @@ XNetFlash
 - ./configure --prefix=/home/vtiwari/lib/swig
 - make install -j 16
 
-CMAKE PATH
-export CMAKE_PREFIX_PATH=/home/vtiwari/lib/swig:/home/vtiwari/lib/gsl/:/home/vtiwari/local_sw/lapack-3.8.0:/home/vtiwari/lib/pardiso:$CMAKE_PREFIX_PATH
+SWIG_DIR=
+<b>export PATH=/home/vtiwari/lib/swig/bin:$PATH</b>
 
+CMAKE PATH  
+<b>export CMAKE_PREFIX_PATH=/home/vtiwari/lib/gsl/:/home/vtiwari/local_sw/lapack-3.8.0:/home/vtiwari/lib/pardiso:/home/vtiwari/local_sw/boost/boost_1_70_0:$CMAKE_PREFIX_PATH</b>
+
+For HDF5:  
 export LD_LIBRARY_PATH=/sw/lib:$LD_LIBRARY_PATH
 
 INSTALL:
 make -j 16 install
 
 #### Issues:
-/home/vtiwari/lib/pardiso/libpardiso600-GNU800-X86-64.so: undefined reference to `log2f@GLIBC_2.27'                                          
-/home/vtiwari/lib/pardiso/libpardiso600-GNU800-X86-64.so: undefined reference to `logf@GLIBC_2.27'                                           
+/home/vtiwari/lib/pardiso/libpardiso600-GNU800-X86-64.so: undefined reference to `log2f@GLIBC_2.27`                                      
+/home/vtiwari/lib/pardiso/libpardiso600-GNU800-X86-64.so: undefined reference to `logf@GLIBC_2.27`    
+
+undefined reference to `H5::CommonFG::openDataSet`  
+
+Not able to find SWIG, after changing the PATH variable, its not able to find libz files.
 
 
 ## torch nuclear reaction network.
