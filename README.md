@@ -165,5 +165,89 @@ Config file: source/physics/sourceTerms/Burn/BurnMain/nuclearBurn/XNet/Config
 | Max. Factor to change dt in a timestep | xnet_tdel_maxmult | 2.0e+0 |
 
 
-   
+### There are clear differences in the Nuclear Network data from XNETFLash and XnetStandalone:
+
+#### netwinv files
+XNetFlash  
+n14      14.000   7   7   1.0     2.86341671                                                                                               
+1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00                                             
+1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00                                             
+1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00 1.00000E+00                                             
+
+XNet Standalone  
+n14      14.000   7   7   1.0     2.863                                                                                                     
+1.00     1.00     1.00     1.00     1.00     1.00     1.00     1.00                                                                      
+1.00     1.00     1.00     1.00     1.00     1.00     1.00     1.00                                                                      
+1.00     1.00     1.00     1.00     1.00     1.00     1.00     1.00                                                                      
+
+
+
+
+
+#### netsu:
+The reaction with label *ffn* is missing in the XNetStandlone. 
+Example:
+
+XnetStandalone  
+0     na22 ne22                            wc12w     2.84300E+0  
+-0.185900E+02 0.000000E+00 0.000000E+00 0.000000E+00  
+0.000000E+00 0.000000E+00 0.000000E+00  
+
+XNetFlash  
+0     na22 ne22                             ffn      2.33100E+00  
+0.140000E+02 0.000000E+00 0.000000E+00 0.000000E+00  
+0.000000E+00 0.000000E+00 0.000000E+00            
+
+## Skynet on Carnie
+
+Bitkucket: git clone https://bitbucket.org/jlippuner/skynet.git
+
+#### Building GSL
+- wget ftp://ftp.gnu.org/gnu/gsl/gsl-latest.tar.gz
+- gunzip and tar the file.
+- ./configure --prefix=/home/vtiwari/lib/gsl
+- make install -j 16
+
+#### Building Boost
+- Download the source from https://www.boost.org/.
+- ./bootstrap.sh
+- ./b2 -j 16
+- ./b2 headers
+- Libs in $BOOST/stage/lib
+- Include files in $BOOST/boost
+- <b>export BOOST_ROOT=/home/vtiwari/local_sw/boost/boost_1_70_0/</b>
+
+#### Installing Pardiso
+- Download the library from the website: https://pardiso-project.org/
+- Put the lic in the file: /home/vtiwari/.local/lic/pardiso.lic
+
+#### Building Swig:
+- Download the source from :
+- ./configure --prefix=/home/vtiwari/lib/swig
+- make install -j 16
+
+SWIG_DIR=
+<b>export PATH=/home/vtiwari/lib/swig/bin:$PATH</b>
+
+CMAKE PATH  
+<b>export CMAKE_PREFIX_PATH=/home/vtiwari/lib/gsl/:/home/vtiwari/local_sw/lapack-3.8.0:/home/vtiwari/lib/pardiso:/home/vtiwari/local_sw/boost/boost_1_70_0:$CMAKE_PREFIX_PATH</b>
+
+For HDF5:  
+export LD_LIBRARY_PATH=/sw/lib:$LD_LIBRARY_PATH
+
+INSTALL:
+make -j 16 install
+
+#### Issues:
+/home/vtiwari/lib/pardiso/libpardiso600-GNU800-X86-64.so: undefined reference to `log2f@GLIBC_2.27`                                      
+/home/vtiwari/lib/pardiso/libpardiso600-GNU800-X86-64.so: undefined reference to `logf@GLIBC_2.27`    
+
+undefined reference to `H5::CommonFG::openDataSet`  
+
+Not able to find SWIG, after changing the PATH variable, its not able to find libz files.
+
+
+## torch nuclear reaction network.
+
+## Comparing the error between Skynet(NSE) vs timmes Touch(NSE) vs XnetStandalone vs XNetFlash
 
