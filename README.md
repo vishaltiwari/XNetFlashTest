@@ -13,7 +13,9 @@
 ./setup test_burn -objdir=object_testburn_xnet_SN231_GPU -3d +cube8 -auto -maxblocks=30 xnet=True xnetGPU=True xnetData=Data_SN231
 
 #### 1D, 1 cell
-./setup test_burn -objdir=object_testburn_xnet_alpha_GPU -1d -auto -maxblocks=30 xnet=True xnetData=Data_alpha xnetGPU=True +noio -nxb=1
+./setup test_burn -objdir=object_testburn_xnet_alpha_GPU -1d -auto -maxblocks=30 xnet=True xnetData=Data_alpha xnetGPU=True +noio -nxb=1  
+
+./setup test_burn -objdir=object_testburn_xnet_SN150_GPU -1d -auto -maxblocks=30 xnet=True xnetData=Data_SN150 xnetGPU=True +noio -nxb=1 -site=master.cl.umassd.edu-xnet
 
 For now the temperature is set by changing the temperature variable in the Burn.F90 file.
 `tmp(ii,jj,kk,thisBlock)  = 5.0e9` line 226, because these is some issue in setting the temperature in Simulation_initBlock.F90.
