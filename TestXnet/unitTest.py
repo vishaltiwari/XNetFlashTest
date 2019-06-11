@@ -19,7 +19,7 @@ def plot_diff(sym_diff_dict,skynet_yield , xnet_yield,base,target , err_plot_fla
     output = base + "_vs_"+target + "_error.png"
     ax = plt.gca()
     #fig, ax = plt.plot()
-  pdb.set_trace()
+  #pdb.set_trace()
   width = 0.25
   for indx, sym in enumerate(sym_diff_dict):
     if err_plot_flag == False:
@@ -52,11 +52,11 @@ def main():
   #xnet_results = ['xnet_alpha_rho1e9_yields.txt']
   #skynet_results = ['/home/vtiwari/runs/XNetFlashTest/xnet_standalone/branches/public/my_code/xnetStandalone_SN150_yields.txt']
   #skynet_results = ['xnet_standalone_alpha_dtmax_1e2_yields.txt']
-  err_plot_flag = True
+  err_plot_flag = False
   base_net = 'XnetStandalone'
   target_net = 'XnetFlash'
-  skynet_results = ['xnet_standalone_alpha_yields.txt']
-  xnet_results = ['xnet_alpha_rho1e9_yields.txt']
+  skynet_results = ['xnet_standalone_alpha_rho1e9_T5e9_yields.txt']
+  xnet_results = ['xnetFLASH_alpha_rho1e9_T5e9_yields.txt']
 
   for indx , file_name in enumerate(skynet_results):
     print("comparing:" + file_name + " " + xnet_results[indx])
@@ -77,13 +77,14 @@ def main():
     eps = 1e-100
     diff_sum = 0
     sym_diff_dict = {}
+    total_nuclide = len(skynet_abud_dic.keys())
     for sym in skynet_abud_dic:
       skynet_yield = skynet_abud_dic[sym]
       xnet_yield = xnet_abud_dic[sym]
-      print("sym:" + sym +" "+ str(skynet_yield) + " " +str(xnet_yield))
       rel_diff = (skynet_yield - xnet_yield)**2/(skynet_yield+eps)
+      print("sym:" + sym +" "+ str(skynet_yield) + " " +str(xnet_yield) + " "+str(rel_diff))
       sym_diff_dict[sym] = rel_diff
-      diff_sum += rel_diff
+      diff_sum += rel_diff/total_nuclide
 
     plot_diff(sym_diff_dict,skynet_abud_dic , xnet_abud_dic,base_net , target_net,err_plot_flag)
 
