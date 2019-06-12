@@ -13,7 +13,9 @@
 ./setup test_burn -objdir=object_testburn_xnet_SN231_GPU -3d +cube8 -auto -maxblocks=30 xnet=True xnetGPU=True xnetData=Data_SN231
 
 #### 1D, 1 cell
-./setup test_burn -objdir=object_testburn_xnet_alpha_GPU -1d -auto -maxblocks=30 xnet=True xnetData=Data_alpha xnetGPU=True +noio -nxb=1
+./setup test_burn -objdir=object_testburn_xnet_alpha_GPU -1d -auto -maxblocks=30 xnet=True xnetData=Data_alpha xnetGPU=True +noio -nxb=1  
+
+./setup test_burn -objdir=object_testburn_xnet_SN150_GPU -1d -auto -maxblocks=30 xnet=True xnetData=Data_SN150 xnetGPU=True +noio -nxb=1 -site=master.cl.umassd.edu-xnet
 
 For now the temperature is set by changing the temperature variable in the Burn.F90 file.
 `tmp(ii,jj,kk,thisBlock)  = 5.0e9` line 226, because these is some issue in setting the temperature in Simulation_initBlock.F90.
@@ -80,29 +82,20 @@ mpiexec noticed that process rank 9 with PID 0 on node node50 exited on signal 9
 forrtl: error (78): process killed (SIGTERM) 
 
 Image              PC                Routine            Line        Source     
-
-libifcoremt.so.5   00007F2D2BA36345  for__signal_handl     Unknown  Unknown 
-
-libpthread-2.17.s  00007F2D2931A6D0  Unknown               Unknown  Unknown 
-
-libintlc.so.5      00007F2D2956EE82  intel_avx_rep_m     Unknown  Unknown 
-
-flash4             00000000004CCDB9  Unknown               Unknown  Unknown 
-
-flash4             000000000044DF59  Unknown               Unknown  Unknown 
-
-flash4             000000000042B2C2  Unknown               Unknown  Unknown 
-
-flash4             000000000041039D  Unknown               Unknown  Unknown 
-
-flash4             00000000004178A3  Unknown               Unknown  Unknown 
-
-flash4             0000000000405642  Unknown               Unknown  Unknown 
-
-libc-2.17.so       00007F2D28F60445  __libc_start_main     Unknown  Unknown 
-
-flash4             0000000000405509  Unknown               Unknown  Unknown 
+libifcoremt.so.5   00007F2D2BA36345  for__signal_handl     Unknown  Unknown  
+libpthread-2.17.s  00007F2D2931A6D0  Unknown               Unknown  Unknown  
+libintlc.so.5      00007F2D2956EE82  intel_avx_rep_m     Unknown  Unknown  
+flash4             00000000004CCDB9  Unknown               Unknown  Unknown   
+flash4             000000000044DF59  Unknown               Unknown  Unknown   
+flash4             000000000042B2C2  Unknown               Unknown  Unknown   
+flash4             000000000041039D  Unknown               Unknown  Unknown   
+flash4             00000000004178A3  Unknown               Unknown  Unknown   
+flash4             0000000000405642  Unknown               Unknown  Unknown   
+libc-2.17.so       00007F2D28F60445  libc_start_main     Unknown  Unknown  
+flash4             0000000000405509  Unknown               Unknown  Unknown   
  
+### Cuda-10.0 and cuda-8.0 on carnie:
+Some nodes on carnie can see only cuda-10.0(node1-node16), which have nvidia v100 and rest(node17-node50) se cuda8.0 and have Tesla M2050(I might be wrong about the GPU card). Need to build the code with cuda-10.0 when running on the first set of nodes and cuda-8.0 for the rest.
  
 ### Issues on running on multiple GPUs: 
 
