@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 
 import numpy as np
 
+plt.rcParams['figure.figsize'] = 17, 8
 plt.rcParams['xtick.bottom'] = plt.rcParams['xtick.labelbottom'] = False
 plt.rcParams['xtick.top'] = plt.rcParams['xtick.labeltop'] = True
 
@@ -20,6 +21,8 @@ def plot_diff(sym_diff_dict,skynet_yield , xnet_yield,base,target , err_plot_fla
     ax = plt.gca()
     #fig, ax = plt.plot()
   #pdb.set_trace()
+  #ax.tick_params(axis='x', labelsize=1)
+  plt.setp(ax.get_xticklabels(), rotation='vertical', fontsize=7)
   width = 0.25
   for indx, sym in enumerate(sym_diff_dict):
     if err_plot_flag == False:
@@ -55,8 +58,10 @@ def main():
   err_plot_flag = False
   base_net = 'XnetStandalone'
   target_net = 'XnetFlash'
-  skynet_results = ['xnet_standalone_alpha_rho1e9_T5e9_yields.txt']
-  xnet_results = ['xnetFLASH_alpha_rho1e9_T5e9_yields.txt']
+  #base_net = 'SkyNet'
+  #target_net = 'XnetStandalone'
+  skynet_results = ['xnetStandalone_SN150_yields_rho1e9_T5e9.txt']
+  xnet_results = ['xnetFlash_SN150_rho1e9_T5e9_yields.txt']
 
   for indx , file_name in enumerate(skynet_results):
     print("comparing:" + file_name + " " + xnet_results[indx])
@@ -78,7 +83,22 @@ def main():
     diff_sum = 0
     sym_diff_dict = {}
     total_nuclide = len(skynet_abud_dic.keys())
+
+    # Testing the missing nuclides:
+    print("These nuclides are not in xnet")
     for sym in skynet_abud_dic:
+      if sym not in xnet_abud_dic:
+        print(sym)
+    
+    print("\n\nThese nuclides are not in skynet")
+    for sym in xnet_abud_dic:
+      if sym not in skynet_abud_dic:
+        print(sym)
+
+    for sym in skynet_abud_dic:
+      if sym=='h2':
+        pdb.set_trace()
+        print('here')
       skynet_yield = skynet_abud_dic[sym]
       xnet_yield = xnet_abud_dic[sym]
       rel_diff = (skynet_yield - xnet_yield)**2/(skynet_yield+eps)
@@ -86,7 +106,8 @@ def main():
       sym_diff_dict[sym] = rel_diff
       diff_sum += rel_diff/total_nuclide
 
-    plot_diff(sym_diff_dict,skynet_abud_dic , xnet_abud_dic,base_net , target_net,err_plot_flag)
+    plot_diff(sym_diff_dict,skynet_abud_dic , xnet_abud_dic,base_net , target_net,True)
+    plot_diff(sym_diff_dict,skynet_abud_dic , xnet_abud_dic,base_net , target_net,False)
 
     print("Relative Error:" + str(diff_sum))
 
