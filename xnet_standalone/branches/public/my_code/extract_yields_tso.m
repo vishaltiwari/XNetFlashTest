@@ -14,6 +14,8 @@ function[data] = extract_yields_tso(tso_filename)
   % eg: data(3) : Initial mass fraction.
   % eg: data(timestep_count) : Final mass fraction.
   data = [zz' ; aa' ; xmf(:,:)'];
+  size(data)
+  sim_time = time'
   params = strcat(strcat(strcat('_temp_',num2str(temperature(1))),'_den_'),num2str(density(1)));
   plot_name = strcat(strcat(tso_filename , params),'_plt.png');
   
@@ -30,5 +32,5 @@ function[data] = extract_yields_tso(tso_filename)
   %% Save the plot
   %saveas(gcf,plot_name)
   mat_filename = strcat(tso_filename,'_.mat');
-  save(mat_filename,'data');
+  save(mat_filename,'data','sim_time');
 end

@@ -5,11 +5,11 @@ import numpy as np
 
 import matplotlib
 matplotlib.use('agg')
-import pdb 
-import matplotlib.pyplot as plt 
+import pdb
+import matplotlib.pyplot as plt
 
 
-def plot_abund(abundance_dict_time , sym_list,file_name):
+def plot_abund(abundance_dict_time , sym_list,file_name,sim_time):
   #pdb.set_trace()
   plot_name = file_name.split('.')[0]+"_mass_fraction.png"
   sym_abund = {}
@@ -28,7 +28,8 @@ def plot_abund(abundance_dict_time , sym_list,file_name):
     # plot
     #if sym == 'fe53':
     #  pdb.set_trace()
-    handle, = plt.plot(range(len(abundance_dict_time['C12'])) , sym_abund[sym], label=sym)
+    #handle, = plt.plot(range(len(abundance_dict_time['C12'])) , sym_abund[sym], label=sym)
+    handle, = plt.semilogx(sim_time , sym_abund[sym], label=sym)
     if mark == True:
       all_handles.append(handle)
       all_legends.append(sym)
@@ -44,12 +45,14 @@ def plot_abund(abundance_dict_time , sym_list,file_name):
 
 def main():
   #print('This is Main')
-  file_dir = '../run_SN231/'
-  file_name = 'tso_SN231_.mat'
+  file_dir = './'
+  file_name = 'tso1_150_rho1e9_T5e9_.mat'
   filepath = file_dir + file_name
   ele_filename = 'Z_file.csv'
   x = loadmat(filepath)
   data = x['data']
+  sim_time = x['sim_time']
+  pdb.set_trace()
   nb_timesteps = data.shape[0] - 2
   nb_nuclides = data.shape[1]
   zz = data[0,:]
@@ -82,7 +85,8 @@ def main():
     abund_dic_time[nuclide] = ab_ndarr
     sym_list.append(nuclide)
     print(nuclide.lower() +" "+ str(data[-1,indx]))
-  plot_abund(abund_dic_time , sym_list , file_name)
+  pdb.set_trace()
+  plot_abund(abund_dic_time , sym_list , file_name,sim_time)
 
 if __name__ == '__main__':
   main()
