@@ -15,6 +15,7 @@ def parse_extract(file_name):
   all_nuclides = []
   count = 1
   total_mass = 0
+  sim_time_arr = []
   for line in file_obj:
     #print(line)
     if 'time' in line:
@@ -33,6 +34,8 @@ def parse_extract(file_name):
     cols = [ele for ele in line.split(' ') if ele !='']
     if first_line == 1:
       total_mass = cols[1]
+      sim_time = cols[0]
+      sim_time_arr.append(sim_time)
       nuclies_abud = [ float(ele)/float(total_mass) for ele in cols[9:]]
       first_line = 0
     else:
@@ -40,7 +43,9 @@ def parse_extract(file_name):
       #nuclies_abud = cols[:]
     
     all_nuclides= all_nuclides + nuclies_abud
-  return abundance_dict_time
+  
+  abundance_dict_time[count] = all_nuclides
+  return abundance_dict_time , sim_time_arr
 
 def parse_sym_file(file_name):
   #print("Opening file:" + file_name)
@@ -61,7 +66,7 @@ def save_yields(file_name , abundance_list , sym_list):
     file_obj.write(nuclide_sym +" "+ str(abundance_list[indx])+"\n")
   #pdb.set_trace()
 
-def plot_abund(abundance_dict_time , sym_list,file_name):
+def plot_abund(abundance_dict_time , sym_list,file_name,sim_time_arr):
   #pdb.set_trace()
   plot_name = file_name.split('.')[0]+"_mass_fraction.png"
   sym_abund = {}
@@ -80,7 +85,11 @@ def plot_abund(abundance_dict_time , sym_list,file_name):
     # plot
     #if sym == 'fe53':
     #  pdb.set_trace()
-    handle, = plt.plot(range(len(abundance_dict_time.keys())) , sym_abund[sym], label=sym)
+    # NOTE:This is to plot agaist the timestep
+    #handle, = plt.plot(range(len(abundance_dict_time.keys())) , sym_abund[sym], label=sym)
+    
+    # NOTE: this is to plot agaist simulation time
+    handle, = plt.plot(sim_time_arr , sym_abund[sym], label=sym)
     if mark == True:
       all_handles.append(handle)
       all_legends.append(sym)
@@ -106,15 +115,15 @@ def main():
   #nuclide_list = ['Data_SN231_list.txt']
   #filenames = ['xnet_alpha_rho1e9_new_xnet_parm.dat']
   #filenames = ['xnet_alpha_new.dat']
-  filenames = ['xnet_alpha_rho1e9_T7e9_1d.dat']
-  nuclide_list = ['Data_alpha_list.txt']
+  filenames = ['xnet_SN150_rho1e9_T5e9/xnetFlash_SN150_rho1e9_T5e9_yields.dat']
+  nuclide_list = ['Data_SN150_list.txt']
   for indx , file_name in enumerate(filenames):
-    abundance_dict_time = parse_extract(file_name)
+    abundance_dict_time, sim_time_arr = parse_extract(file_name)
     total_iter = len(abundance_dict_time.keys())
     #pdb.set_trace()
     sym_list = parse_sym_file(nuclide_list[indx])
     save_yields(file_name, abundance_dict_time[total_iter] , sym_list)
-    plot_abund(abundance_dict_time , sym_list, file_name)
+    plot_abund(abundance_dict_time , sym_list, file_name , sim_time_arr)
     #pdb.set_trace()
 
 if __name__ == '__main__':
