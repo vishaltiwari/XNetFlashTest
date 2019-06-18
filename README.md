@@ -200,6 +200,11 @@ XNetFlash
 0.140000E+02 0.000000E+00 0.000000E+00 0.000000E+00  
 0.000000E+00 0.000000E+00 0.000000E+00            
 
+
+## Issue:
+netweak file which contains the weak reaction rates is missing in the xnetStandalone code. Maybe the reason for the differences in the yields? Seems like the code was using weak reaction data, because turning it off seems like Ni56 doesn't drop off as in the case when it is turned on.
+
+
 ## Skynet on Carnie
 
 Bitkucket: git clone https://bitbucket.org/jlippuner/skynet.git
