@@ -6,6 +6,8 @@ matplotlib.use('agg')
 import pdb
 import matplotlib.pyplot as plt
 
+import pickle
+
 def parse_extract(file_name):
   #pdb.set_trace()
   file_obj = open(file_name,"r")
@@ -68,7 +70,7 @@ def save_yields(file_name , abundance_list , sym_list):
 
 def plot_abund(abundance_dict_time , sym_list,file_name,sim_time_arr):
   #pdb.set_trace()
-  plot_name = file_name.split('.')[0]+"_mass_fraction.png"
+  plot_name = file_name.split('.')[0]+"_loglog_mass_fraction.png"
   sym_abund = {}
   thres_abund = 1e-2
   all_legends = []
@@ -89,7 +91,8 @@ def plot_abund(abundance_dict_time , sym_list,file_name,sim_time_arr):
     #handle, = plt.plot(range(len(abundance_dict_time.keys())) , sym_abund[sym], label=sym)
     
     # NOTE: this is to plot agaist simulation time
-    handle, = plt.plot(sim_time_arr , sym_abund[sym], label=sym)
+    #handle, = plt.semilogx(sim_time_arr , sym_abund[sym], label=sym)
+    handle, = plt.semilogx(sim_time_arr , sym_abund[sym], label=sym)
     if mark == True:
       all_handles.append(handle)
       all_legends.append(sym)
@@ -107,24 +110,23 @@ def main():
   print("Inside the main function")
   #filenames = ["xnet_SN150_rho2e3.dat","xnet_SN150_rho2e7.dat", "xnet_SN160_rho2e3.dat","xnet_SN160_rho2e7.dat", "xnet_SN231_rho2e3_long.dat","xnet_SN231_rho2e7.dat","xnet_SN150_rho1e9.dat","xnet_SN160_rho1e9.dat","xnet_SN231_rho1e9.dat"]
   #nuclide_list = ["Data_SN150_list.txt","Data_SN150_list.txt","Data_SN160_list.txt","Data_SN160_list.txt","Data_SN231_list.txt","Data_SN231_list.txt","Data_SN150_list.txt","Data_SN160_list.txt","Data_SN231_list.txt"]
-  #filenames = ["xnet_SN160_rho1e9.dat"]
-  #nuclide_list = ["Data_SN160_list.txt"]
-  #filenames = ['xnet_alpha_rho1e9.dat']
-  #nuclide_list = ['Data_alpha_list.txt']
-  #filenames = ['xnet_SN231_rho1e9_temp_7e9.dat']
-  #nuclide_list = ['Data_SN231_list.txt']
-  #filenames = ['xnet_alpha_rho1e9_new_xnet_parm.dat']
-  #filenames = ['xnet_alpha_new.dat']
   filenames = ['xnet_SN150_rho1e9_T5e9/xnetFlash_SN150_rho1e9_T5e9_yields.dat']
+  #filenames = ['xnet_SN150_GP.dat']
   nuclide_list = ['Data_SN150_list.txt']
+  pickle_data = [] 
   for indx , file_name in enumerate(filenames):
     abundance_dict_time, sim_time_arr = parse_extract(file_name)
     total_iter = len(abundance_dict_time.keys())
-    #pdb.set_trace()
     sym_list = parse_sym_file(nuclide_list[indx])
     save_yields(file_name, abundance_dict_time[total_iter] , sym_list)
+
+    # save the data into a pickel file which can be used by plot_XnetFlash_vs_XnetStand.py
+    pickle_data.append(abundance_dict_time)
+    pickle_data.append(sym_list)
+    pickle_data.append(sim_time_arr)
+    pickle.dump(pickle_data , open(file_name.split('.')[0]+"_data.p","w"))
+
     plot_abund(abundance_dict_time , sym_list, file_name , sim_time_arr)
-    #pdb.set_trace()
 
 if __name__ == '__main__':
   main()
