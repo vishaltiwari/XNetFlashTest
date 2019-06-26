@@ -60,8 +60,14 @@ def main():
   target_net = 'XnetFlash'
   #base_net = 'SkyNet'
   #target_net = 'XnetStandalone'
-  skynet_results = ['xnetStandalone_SN150_yields_rho1e9_T5e9.txt']
-  xnet_results = ['xnetFlash_SN150_rho1e9_T5e9_yields.txt']
+
+  # SN150
+  skynet_results = ['xnet_SN150_rho1e9_T6e9/ts_tnsn_SN150_1_yield.txt']
+  xnet_results = ['xnet_SN150_rho1e9_T6e9/xnetFlash_SN150_yields.txt']
+  
+  # Alpha
+  #skynet_results = ['xnet_alpha_rho1e9_T6e9/ts_tnsn_alpha_1_yield.txt']
+  #xnet_results = ['xnet_alpha_rho1e9_T6e9/xnetFlash_alph_yields.txt']
 
   for indx , file_name in enumerate(skynet_results):
     print("comparing:" + file_name + " " + xnet_results[indx])
@@ -101,7 +107,7 @@ def main():
         print('here')
       skynet_yield = skynet_abud_dic[sym]
       xnet_yield = xnet_abud_dic[sym]
-      rel_diff = (skynet_yield - xnet_yield)**2/(skynet_yield+eps)
+      rel_diff = (skynet_yield - xnet_yield)**2/((skynet_yield+eps)**2)
       print("sym:" + sym +" "+ str(skynet_yield) + " " +str(xnet_yield) + " "+str(rel_diff))
       sym_diff_dict[sym] = rel_diff
       diff_sum += rel_diff/total_nuclide

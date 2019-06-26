@@ -70,7 +70,7 @@ def save_yields(file_name , abundance_list , sym_list):
 
 def plot_abund(abundance_dict_time , sym_list,file_name,sim_time_arr):
   #pdb.set_trace()
-  plot_name = file_name.split('.')[0]+"_loglog_mass_fraction.png"
+  plot_name = file_name.split('.')[0]+"_mass_fraction.png"
   sym_abund = {}
   thres_abund = 1e-2
   all_legends = []
@@ -110,9 +110,11 @@ def main():
   print("Inside the main function")
   #filenames = ["xnet_SN150_rho2e3.dat","xnet_SN150_rho2e7.dat", "xnet_SN160_rho2e3.dat","xnet_SN160_rho2e7.dat", "xnet_SN231_rho2e3_long.dat","xnet_SN231_rho2e7.dat","xnet_SN150_rho1e9.dat","xnet_SN160_rho1e9.dat","xnet_SN231_rho1e9.dat"]
   #nuclide_list = ["Data_SN150_list.txt","Data_SN150_list.txt","Data_SN160_list.txt","Data_SN160_list.txt","Data_SN231_list.txt","Data_SN231_list.txt","Data_SN150_list.txt","Data_SN160_list.txt","Data_SN231_list.txt"]
-  filenames = ['xnet_SN150_rho1e9_T5e9/xnetFlash_SN150_rho1e9_T5e9_yields.dat']
+  #filenames = ['xnet_SN150_rho1e9_T5e9/xnetFlash_SN150_rho1e9_T5e9_yields.dat']
+  #filenames = ['xnet_SN150_rho1e9_T6e9/xnetFlash_SN150.dat']
+  filenames = ['xnet_alpha_rho1e9_T6e9/xnetFlash_alph.dat']
   #filenames = ['xnet_SN150_GP.dat']
-  nuclide_list = ['Data_SN150_list.txt']
+  nuclide_list = ['Data_alpha_list.txt']
   pickle_data = [] 
   for indx , file_name in enumerate(filenames):
     abundance_dict_time, sim_time_arr = parse_extract(file_name)
